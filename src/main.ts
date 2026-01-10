@@ -25,10 +25,23 @@ if (import.meta.env.MODE === 'development' && username && password) {
 const KEY = import.meta.env.VITE_KEY;
 export { KEY };
 
+// Vimeo Video ID constant
+const VIMEO_VIDEO_ID = '76979871';
+
 const user = await churchtoolsClient.get<Person>(`/whoami`);
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div style="display: flex; place-content: center; place-items: center; height: 100vh;">
-    <h1>Welcome ${[user.firstName, user.lastName].join(' ')}</h1>
+  <div style="display: flex; flex-direction: column; place-content: center; place-items: center; height: 100vh; padding: 20px;">
+    <h1 style="margin-bottom: 20px;">Welcome ${[user.firstName, user.lastName].join(' ')}</h1>
+    <div style="position: relative; width: 100%; max-width: 800px; padding-bottom: 56.25%; height: 0;">
+      <iframe 
+        src="https://player.vimeo.com/video/${VIMEO_VIDEO_ID}" 
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+        frameborder="0" 
+        allow="autoplay; fullscreen; picture-in-picture" 
+        allowfullscreen
+        title="Vimeo Video Player">
+      </iframe>
+    </div>
   </div>
 `;
