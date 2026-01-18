@@ -1,21 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<html lang="de-DE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ChurchTools Extension - Video Player" />
+    <meta name="theme-color" content="#000000" />
     <title>ChurchTools Extension</title>
-</head>
-<body>
 
-<div style="padding:56.25% 0 0 0;position:relative;">
-    <iframe src="https://player.vimeo.com/video/1075851772?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-            frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;"
-            title="PJT2025-Schulungsvideo_final"></iframe>
-</div>
-<script src="https://player.vimeo.com/api/player.js"></script>
+    <style>
+      :root {
+        --color-bg: #000;
+        --color-text: #fff;
+        --font-family: system-ui, -apple-system, sans-serif;
+      }
 
-<div id="app" class="min-h-screen flex flex-col"></div>
-<script type="module" src="/src/main.ts"></script>
-</body>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        font-family: var(--font-family);
+        line-height: 1.5;
+        height: 100%;
+      }
+
+      main {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 1rem 0;
+        font-size: 1.5rem;
+      }
+
+      .video-container {
+        flex: 1;
+        position: relative;
+        width: 100%;
+        background-color: var(--color-bg);
+      }
+
+      .video-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* aspect-ratio: 16 / 9 */
+      }
+
+      .video-wrapper iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <h1>Demo embed-video</h1>
+
+      <section class="video-container">
+        <div class="video-wrapper">
+          <iframe
+            src="https://player.vimeo.com/video/1153226842?autoplay=1"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+            title="2026 PJT Schulungs- und Präventionsvideo"
+            loading="lazy"
+            fetchpriority="high">
+          </iframe>
+        </div>
+      </section>
+    </main>
+
+    <script async src="https://player.vimeo.com/api/player.js"></script>
+  </body>
 </html>
