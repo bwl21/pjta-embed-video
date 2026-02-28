@@ -19,7 +19,7 @@ let gitHash = '';
 try {
     gitHash = execSync('git rev-parse --short HEAD', { encoding: 'utf8' }).trim();
 } catch (error) {
-    console.warn('Warning: Could not get git hash, using timestamp');
+    console.warn('Warnung: Git-Hash konnte nicht ermittelt werden, verwende Zeitstempel');
     gitHash = Date.now().toString(36);
 }
 
@@ -33,16 +33,16 @@ if (!fs.existsSync(releasesDir)) {
 const archiveName = `${projectName}-v${version}-${gitHash}.zip`;
 const archivePath = path.join(releasesDir, archiveName);
 
-console.log('📦 Creating ChurchTools extension package...');
-console.log(`   Project: ${projectName}`);
+console.log('📦 Erstelle ChurchTools-Extension-Paket...');
+console.log(`   Projekt: ${projectName}`);
 console.log(`   Version: ${version}`);
 console.log(`   Git Hash: ${gitHash}`);
-console.log(`   Archive: ${archiveName}`);
+console.log(`   Archiv: ${archiveName}`);
 
 // Check if dist directory exists
 const distDir = path.join(rootDir, 'dist');
 if (!fs.existsSync(distDir)) {
-    console.error('❌ Error: dist directory not found. Run "npm run build" first.');
+    console.error('❌ Fehler: dist-Verzeichnis nicht gefunden. Bitte zuerst "npm run build" ausführen.');
     process.exit(1);
 }
 
@@ -51,13 +51,13 @@ try {
     const zipCommand = `cd "${rootDir}" && zip -r "${archivePath}" dist/ -x "*.map" "*.DS_Store"`;
     execSync(zipCommand, { stdio: 'inherit' });
     
-    console.log('✅ Package created successfully!');
-    console.log(`📁 Location: ${archivePath}`);
+    console.log('✅ Paket erfolgreich erstellt!');
+    console.log(`📁 Speicherort: ${archivePath}`);
     console.log('');
-    console.log('🚀 Next steps:');
-    console.log('   1. Upload the ZIP file to your ChurchTools instance');
-    console.log('   2. Go to Admin → Extensions → Upload Extension');
-    console.log('   3. Select the ZIP file and install');
+    console.log('🚀 Nächste Schritte:');
+    console.log('   1. Lade die ZIP-Datei in deine ChurchTools-Instanz hoch');
+    console.log('   2. Gehe zu Admin → Erweiterungen → Erweiterung hochladen');
+    console.log('   3. Wähle die ZIP-Datei aus und installiere sie');
     console.log('');
     
     // Show file size
@@ -67,6 +67,6 @@ try {
     console.log(`📊 Package size: ${fileSizeInMB} MB`);
     
 } catch (error) {
-    console.error('❌ Error creating package:', error.message);
+    console.error('❌ Fehler beim Erstellen des Pakets:', error.message);
     process.exit(1);
 }
